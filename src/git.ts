@@ -2577,7 +2577,18 @@ const optionalCommands: Record<string, Omit<Fig.Subcommand, "name">> = {
 
 const completionSpec: Fig.Spec = {
   name: "git",
-  description: "The stupid content tracker",
+  description: "The basic content tracker",
+  subcommands: [
+    {
+      name: "checkout",
+      description: "Switch branches or restore working tree files",
+      args: {
+        name: "branch",
+        description: "The branch you want to checkout",
+        isOptional: true,
+      },
+    },
+  ],
   generateSpec: async (_, executeShellCommand) => {
     const out = await executeShellCommand(
       "compgen -c | grep git- | cut -c5- | sort -u"
